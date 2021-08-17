@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<div class="craft_wrapper">
+    <div class="craft">
+        <a href="/potions">
+            <div class="to_potion">
+                <div class="to_potion_pointer"></div>
+            </div>    
+            </a>
+        <div class="potion_craft">
+            <div id="carousel" class="carousel">
+                <div class="gallery">
+                    <ul class="images" id='images'>
+                        {% for ingredient in potion.ingredients %}
+                            <li><img src="{%static ingredient%}"></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <h1 class='todo_pointer'>Добавьте ингредиент, указанный на экране</h1>
+            <div class="buttons" id='buttons'>
+                    <button class="arrow prev"><</button>
+                    <button class="arrow next">Следующий шаг</button>
+                </div>
+        </div>
+        <div class="edit_potion" id='edit_potion'>
+            <h1 class='edit_potion_header'>Изменение зелье: </h1>
+            <div class="edit_potion_args">
+                {% if potion.up_time %}
+                    <div class="edit_potion_time edit_buttons">
+                        <div class="edit_potion_time_button">
+                            <button class="time edit_button"><img src="../staticbase/media/plus.png" alt=""></button>
+                        </div>
+                        <p>Длительность</p>
+                    </div>
+                {% else %}
+                    <div class="edit_potion_time edit_buttons" style='display: none;'>
+                        <div class="edit_potion_time_button">
+                            <button class="time edit_button"><img src="../staticbase/media/plus.png" alt=""></button>
+                        </div>
+                        <p>Длительность</p>
+                    </div>
+                {% endif %}
+                <div class="edit_potion_explosive edit_buttons">
+                    <div class="edit_potion_expolive_button">
+                        <button class='is_explosive edit_button'><img src="../staticbase/media/plus.png" alt=""></button>
+                    </div>
+                    <p>Взрывное</p>
+                </div>
+                
+                <div class="edit_potion_lingering edit_buttons">
+                    <div class="edit_potion_lingering_button">
+                        <button class='is_lingering edit_button'><img src="../staticbase/media/plus.png" alt=""></button>
+                    </div>
+                    <p>Оседание</p>
+                </div>
+                
+                {% if potion.up_level %}
+                    <div class="edit_potion_level edit_buttons">
+                        <div class="edit_potion_level_button">
+                            <button class='level edit_button'><img src="../staticbase/media/plus.png" alt=""></button>
+                        </div>
+                        <p>Уровень</p>
+                    </div>
+                {% else %}
+                    <div class="edit_potion_level edit_buttons" style='display: none;'>
+                        <div class="edit_potion_level_button">
+                            <button class='level edit_button'><img src="../staticbase/media/plus.png" alt=""></button>
+                        </div>
+                        <p>Уровень</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="potion_info">
+            <h1 class='potion_info_header'>Сейчас просматриваете: </h1>
+            <div class='potion_info_args' id='potion_info_args'>
+                <p>Зелье {{potion.name}}</p>
+                {% if potion.up_level %}
+                    <p class='potions_info_args_level'>1 уровень</p>
+                {% endif %}
+                <p class='potions_info_args_time'>Время длительности: {{potion.time}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}   
+{% block script %}
+<script>
+    
+    let list = carousel.querySelector('ul');
+    let listElems = carousel.querySelectorAll('li');
+
+
+    
+    let i = 1;
+    for(let li of carousel.querySelectorAll('li')) {
+        li.style.position = 'relative';
+        li.insertAdjacentHTML('beforeend', `<span style="position:absolute;left:0;top:0">${i}</span>`);
+        i++;
+    }
+    
+    /* конфигурация */
+    let width = 75; // ширина картинки
+    let count = 1; // видимое количество изображений
+    
+    let gunpowder_id;
+    let redstone_id;
+    let glowstone_dust_id;
+    let lingering_id;
+    
+    
+    let position = 0; // положение ленты прокрутки
+    
+    
+    buttons.querySelector('.prev').onclick = function() {
+        // сдвиг влево
+        position += width * count;
+        // последнее передвижение влево может быть не на 3, а на 2 или 1 элемент
+        position = Math.min(position, 0)
+        list.style.marginLeft = position + 'px';
+    };
+    
+    buttons.querySelector('.next').onclick = function() {
+        // сдвиг вправо
+        position -= width * count;
+        // последнее передвижение вправо может быть не на 3, а на 2 или 1 элемент
+        position = Math.max(position, -width * (listElems.length - count));
+        list.style.marginLeft = position + 'px';
+    };
+    
+    
+    edit_potion.querySelector('.is_explosive').onclick = function() {
+        if (edit_potion.querySelector('.is_explosive').innerHTML == '<img src="../staticbase/media/plus.png" alt="">') {
+            gunpowder_id = i
+            images.insertAdjacentHTML('beforeend', `<li style='position: relative' id='${gunpowder_id}'><img src='/staticbase/media/ingredient/gunpowder.png'></img><span style='position:absolute;left:0;top:0'>${i}</span></li>`);
+            edit_potion.querySelector('.is_explosive').innerHTML = '<img src="../staticbase/media/minus.png" alt="" style="box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);">';
+            document.querySelector('#potion_info_args').insertAdjacentHTML('beforeend', '<p id="potion_info_args_explosive">Взрывное</p>')
+
+            i++;
+        } else if (edit_potion.querySelector('.is_explosive').innerHTML == '<img src="../staticbase/media/minus.png" alt="" style="box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);">') {
+            if (edit_potion.querySelector('.is_lingering').innerHTML == '<img src="../staticbase/media/minus.png" alt="" style="box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);">') {
+            edit_potion.querySelector('.is_lingering').innerHTML = '<img src="../staticbase/media/plus.png" alt="">'
+            document.getElementById(lingering_id).remove()
+            document.getElementById('potion_info_args_lingering').remove()
+            listElems = carousel.querySelectorAll('li');
+            if (position == -width * (listElems.length)) {
+                position += width * count;
+                list.style.marginLeft = position + 'px';
+            }
+            i--
+        }
+            edit_potion.querySelector('.is_explosive').innerHTML = '<img src="../staticbase/media/plus.png" alt="">'
+            document.getElementById(gunpowder_id).remove()
+            document.getElementById('potion_info_args_explosive').remove()
+            listElems = carousel.querySelectorAll('li');
+            if (position == -width * (listElems.length)) {
+                position += width * count;
+                list.style.marginLeft = position + 'px';
+            }
+            i--
+        }
+        listElems = carousel.querySelectorAll('li');
+        
+
+    }
+    edit_potion.querySelector('.is_lingering').onclick = function() {
+        if (edit_potion.querySelector('.is_lingering').innerHTML == '<img src="../staticbase/media/plus.png" alt="">') {
+            if (edit_potion.querySelector('.is_explosive').innerHTML == '<img src="../staticbase/media/plus.png" alt="">') {
+                gunpowder_id = i
+                images.insertAdjacentHTML('beforeend', `<li style='position: relative' id='${gunpowder_id}'><img src='/staticbase/media/ingredient/gunpowder.png'></img><span style='position:absolute;left:0;top:0'>${i}</span></li>`);
+                edit_potion.querySelector('.is_explosive').innerHTML = '<img src="../staticbase/media/minus.png" alt="" style="box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);">';
+                document.querySelector('#potion_info_args').insertAdjacentHTML('beforeend', '<p id="potion_info_args_explosive">Взрывное</p>')
+
+                i++;
+            }
+            lingering_id = i
+            images.insertAdjacentHTML('beforeend', `<li style='position: relative' id='${lingering_id}'><img src='/staticbase/media/ingredient/dragon_breath.png'></img><span style='position:absolute;left:0;top:0'>${i}</span></li>`);
+            edit_potion.querySelector('.is_lingering').innerHTML = '<img src="../staticbase/media/minus.png" alt="" style="box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);">';
+            document.querySelector('#potion_info_args').insertAdjacentHTML('beforeend', '<p id="potion_info_args_lingering">Оседающее</p>')
+
+            i++;
+        } else if (edit_potion.querySelector('.is_lingering').innerHTML == '<img src="../staticbase/media/minus.png" alt="" style="box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);">') {
+            edit_potion.querySelector('.is_lingering').innerHTML = '<img src="../staticbase/media/plus.png" alt="">'
+            document.getElementById(lingering_id).remove()
+            document.getElementById('potion_info_args_lingering').remove()
+            listElems = carousel.querySelectorAll('li');
+            if (position == -width * (listElems.length)) {
+                position += width * count;
+                list.style.marginLeft = position + 'px';
+            }
+            i--
+        }
+        listElems = carousel.querySelectorAll('li');
+        
+
+    }
+
+    edit_potion.querySelector('.time').onclick = function() {
+        if (edit_potion.querySelector('.time').innerHTML == '<img src="../staticbase/media/plus.png" alt="">') {
+            redstone_id = i
+            images.insertAdjacentHTML('beforeend', `<li style='position: relative' id='${redstone_id}'><img src='/staticbase/media/ingredient/redstone.png'></img><span style='position:absolute;left:0;top:0'>${i}</span></li>`);
+            edit_potion.querySelector('.time').innerHTML = '<img src="../staticbase/media/minus.png" alt="" style="box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);">'
+            document.querySelector('.potions_info_args_time').innerHTML = 'Время длительности: {{potion.time_plus}}'
+            listElems = carousel.querySelectorAll('li');
+            i++;
+            if (edit_potion.querySelector('.level').innerHTML == '<img src="../staticbase/media/minus.png" alt="" style="box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);">') {
+                document.getElementById(glowstone_dust_id).remove()
+                edit_potion.querySelector('.level').innerHTML = '<img src="../staticbase/media/plus.png" alt="">'
+                document.querySelector('.potions_info_args_time').innerHTML = 'Время длительности: {{potion.time_plus}}'
+                document.querySelector('.potions_info_args_level').innerHTML = '1 уровень'
+                listElems = carousel.querySelectorAll('li');
+                if (position == -width * (listElems.length)) {
+                    position += width * count;
+                    list.style.marginLeft = position + 'px';
+                }
+                i--
+        }
+        } else if (edit_potion.querySelector('.time').innerHTML == '<img src="../staticbase/media/minus.png" alt="" style="box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);">') {
+            document.getElementById(redstone_id).remove()
+            edit_potion.querySelector('.time').innerHTML = '<img src="../staticbase/media/plus.png" alt="">'
+            document.querySelector('.potions_info_args_time').innerHTML = 'Время длительности: {{potion.time}}'
+            listElems = carousel.querySelectorAll('li');
+            if (position == -width * (listElems.length)) {
+                position += width * count;
+                list.style.marginLeft = position + 'px';
+            }
+            i--
+        }
+        
+    }
+
+    edit_potion.querySelector('.level').onclick = function () {
+        if (edit_potion.querySelector('.level').innerHTML == '<img src="../staticbase/media/plus.png" alt="">') {
+            glowstone_dust_id = i
+            images.insertAdjacentHTML('beforeend', `<li style='position: relative' id='${glowstone_dust_id}'><img src='/staticbase/media/ingredient/glowstone_dust.png'></img><span style='position:absolute;left:0;top:0'>${i}</span></li>`);
+            edit_potion.querySelector('.level').innerHTML = '<img src="../staticbase/media/minus.png" alt="" style="box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);">'
+            document.querySelector('.potions_info_args_level').innerHTML = '2 уровень'
+            document.querySelector('.potions_info_args_time').innerHTML = 'Время длительности: {{potion.time_up_level}}'
+            listElems = carousel.querySelectorAll('li');
+            i++;
+            if (edit_potion.querySelector('.time').innerHTML == '<img src="../staticbase/media/minus.png" alt="" style="box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);">') {
+                document.getElementById(redstone_id).remove()
+                edit_potion.querySelector('.time').innerHTML = '<img src="../staticbase/media/plus.png" alt="">'
+                document.querySelector('.potions_info_args_time').innerHTML = 'Время длительности: {{potion.time_up_level}}'
+                listElems = carousel.querySelectorAll('li');
+                if (position == -width * (listElems.length)) {
+                    position += width * count;
+                    list.style.marginLeft = position + 'px';
+                }
+                i--
+        }
+        } else if (edit_potion.querySelector('.level').innerHTML == '<img src="../staticbase/media/minus.png" alt="" style="box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);">') {
+            document.getElementById(glowstone_dust_id).remove()
+            edit_potion.querySelector('.level').innerHTML = '<img src="../staticbase/media/plus.png" alt="">'
+            document.querySelector('.potions_info_args_time').innerHTML = 'Время длительности: {{potion.time}}'
+            document.querySelector('.potions_info_args_level').innerHTML = '1 уровень'
+            listElems = carousel.querySelectorAll('li');
+            if (position == -width * (listElems.length)) {
+                position += width * count;
+                list.style.marginLeft = position + 'px';
+            }
+            i--
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="potion_page">
+    <div class="potion_page_header_wrapper">
+        <h1>Выберите зелье, которое хотите скрафтить</h1>
+    </div>
+    <div class='potions'>
+        {% for potion in potions_list %}
+            <a href="/craft/{{ potion.id }}">
+                <div class='potion-wrapper'>
+                    <div class="potion_image">
+                        <img src="/staticbase/media/{{potion.image}}" alt="">
+                    </div>
+                    <div class="potion_name">
+                        <p>Зелье</p>
+                        <p>{{ potion.name }}</p>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
