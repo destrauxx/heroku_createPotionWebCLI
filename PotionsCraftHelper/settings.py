@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-70-2tlpsn=b4i0t-91m9@zryx+4#k0uzu6j$@_e#vg1k9x(uns
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://quiet-badlands-81156.herokuapp.com/']
+
 
 
 # Application definition
