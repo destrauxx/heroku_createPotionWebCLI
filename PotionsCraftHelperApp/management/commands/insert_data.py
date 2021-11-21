@@ -13,7 +13,7 @@ class Command(BaseCommand):
                 created_data_potion.ingredients = potion['ingredients']
                 created_data_potion.time = potion['time']
                 created_data_potion.time_plus = potion['time_plus']
-                created_data_potion.time_up_plus = potion['time_up_level']
+                created_data_potion.time_up_level = potion['time_up_level']
                 created_data_potion.up_level = potion['up_level']
                 created_data_potion.up_time = potion['up_time']
                 created_data_potion.image = potion['image']
