@@ -1,0 +1,132 @@
+[
+    {
+        "name": "\u043b\u0435\u0447\u0435\u043d\u0438\u044f",
+        "ingredients": "media/ingredient/nether_wart.png, media/ingredient/glistering_melon.png",
+        "time": "\u041c\u0433\u043d\u043e\u0432\u0435\u043d\u043d\u043e",
+        "time_plus": "\u041c\u0433\u043d\u043e\u0432\u0435\u043d\u043d\u043e",
+        "time_up_level": "\u041c\u0433\u043d\u043e\u0432\u0435\u043d\u043d\u043e",
+        "up_level": true,
+        "up_time": false,
+        "image": "potions_images/healing_potion.png"
+    },
+    {
+        "name": "\u043e\u0433\u043d\u0435\u0441\u0442\u043e\u0439\u043a\u043e\u0441\u0442\u0438",
+        "ingredients": "media/ingredient/nether_wart.png, media/ingredient/magma_cream.png",
+        "time": "3:00",
+        "time_plus": "8:00",
+        "time_up_level": null,
+        "up_level": false,
+        "up_time": true,
+        "image": "potions_images/fire_resistance_potion.png"
+    },
+    {
+        "name": "\u0440\u0435\u0433\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u0438",
+        "ingredients": "media/ingredient/nether_wart.png, media/ingredient/ghast_tear.png",
+        "time": "0:45",
+        "time_plus": "1:30",
+        "time_up_level": "0:22",
+        "up_level": true,
+        "up_time": true,
+        "image": "potions_images/regeneration_potion.png"
+    },
+    {
+        "name": "\u0441\u0438\u043b\u044b",
+        "ingredients": "media/ingredient/nether_wart.png, media/ingredient/blaze_powder.png",
+        "time": "3:00",
+        "time_plus": "8:00",
+        "time_up_level": "1:30",
+        "up_level": true,
+        "up_time": true,
+        "image": "potions_images/strength_potion.png"
+    },
+    {
+        "name": "\u0441\u043a\u043e\u0440\u043e\u0441\u0442\u0438",
+        "ingredients": "media/ingredient/nether_wart.png, media/ingredient/sugar.png",
+        "time": "3:00",
+        "time_plus": "8:00",
+        "time_up_level": "1:30",
+        "up_level": true,
+        "up_time": true,
+        "image": "potions_images/speed_potion.png"
+    },
+    {
+        "name": "\u043d\u043e\u0447\u043d\u043e\u0433\u043e \u0437\u0440\u0435\u043d\u0438\u044f",
+        "ingredients": "media/ingredient/nether_wart.png, media/ingredient/golden_carrot.png",
+        "time": "3:00",
+        "time_plus": "8:00",
+        "time_up_level": null,
+        "up_level": false,
+        "up_time": true,
+        "image": "potions_images/night_vision_potion.png"
+    },
+    {
+        "name": "\u043f\u043e\u0434\u0432\u043e\u0434\u043d\u043e\u0433\u043e \u0434\u044b\u0445\u0430\u043d\u0438\u044f",
+        "ingredients": "media/ingredient/nether_wart.png, media/ingredient/pufferfish.png",
+        "time": "3:00",
+        "time_plus": "8:00",
+        "time_up_level": null,
+        "up_level": false,
+        "up_time": true,
+        "image": "potions_images/water_breathing_potion.png"
+    },
+    {
+        "name": "\u043c\u0435\u0434\u043b\u0435\u043d\u043d\u043e\u0433\u043e \u043f\u0430\u0434\u0435\u043d\u0438\u044f",
+        "ingredients": "media/ingredient/nether_wart.png, media/ingredient/phantom_membrane.png",
+        "time": "1:30",
+        "time_plus": "4:00",
+        "time_up_level": null,
+        "up_level": false,
+        "up_time": true,
+        "image": "potions_images/Potion_of_Slow_Falling.png"
+    },
+    {
+        "name": "\u0447\u0435\u0440\u0435\u043f\u0430\u0448\u044c\u0435\u0439 \u043c\u043e\u0449\u0438",
+        "ingredients": "media/ingredient/nether_wart.png, media/ingredient/turtle_shell.png",
+        "time": "0:20",
+        "time_plus": "0:40",
+        "time_up_level": "0:20",
+        "up_level": true,
+        "up_time": true,
+        "image": "potions_images/PotionOfTurtleMasterNew.png"
+    },
+    {
+        "name": "\u043f\u0440\u044b\u0433\u0443\u0447\u0435\u0441\u0442\u0438",
+        "ingredients": "media/ingredient/nether_wart.png, media/ingredient/rabbit_foot.png",
+        "time": "3:00",
+        "time_plus": "8:00",
+        "time_up_level": "1:30",
+        "up_level": true,
+        "up_time": true,
+        "image": "potions_images/leaping_potion.png"
+    },
+    {
+        "name": "\u043e\u0442\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f",
+        "ingredients": "media/ingredient/nether_wart.png, media/ingredient/spider_eye.png",
+        "time": "0:45",
+        "time_plus": "1:30",
+        "time_up_level": "0:21.6",
+        "up_level": true,
+        "up_time": true,
+        "image": "potions_images/poison_potion.png"
+    },
+    {
+        "name": "\u0441\u043b\u0430\u0431\u043e\u0441\u0442\u0438",
+        "ingredients": "media/ingredient/fermented_spider_eye.png",
+        "time": "1:30",
+        "time_plus": "4:00",
+        "time_up_level": null,
+        "up_level": false,
+        "up_time": true,
+        "image": "potions_images/weakness_potion.png"
+    },
+    {
+        "name": "\u043d\u0435\u0432\u0438\u0434\u0438\u043c\u043e\u0441\u0442\u0438",
+        "ingredients": "media/ingredient/nether_wart.png, media/ingredient/golden_carrot.png, media/ingredient/fermented_spider_eye.png",
+        "time": "3:00",
+        "time_plus": "8:00",
+        "time_up_level": null,
+        "up_level": false,
+        "up_time": true,
+        "image": "potions_images/invisibility_potion.png"
+    }
+]
